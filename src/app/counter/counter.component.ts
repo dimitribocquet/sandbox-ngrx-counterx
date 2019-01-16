@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { Detail } from '../models/detail';
 
 @Component({
   selector: 'cc-counter',
@@ -8,6 +9,7 @@ import { Store, select } from '@ngrx/store';
 })
 export class CounterComponent implements OnInit {
   total = 0;
+  allDetails: Detail[];
 
   constructor(
     private store: Store<any>
@@ -20,6 +22,8 @@ export class CounterComponent implements OnInit {
       select('appState')
     ).subscribe(data => {
       this.total = data.count
+      this.allDetails = data.details;
+
       console.log('data', data);
     });
   }

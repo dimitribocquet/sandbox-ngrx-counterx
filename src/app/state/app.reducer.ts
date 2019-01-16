@@ -1,8 +1,10 @@
+import { Detail } from './../models/detail';
 import { State } from './app.state';
 
 const initialState: State = {
     count: 0,
     title: 'Super compteur',
+    details: []
 }
 
 export function reducer(state = initialState, action) {
@@ -12,7 +14,8 @@ export function reducer(state = initialState, action) {
         case 'INCREMENT':
             const newState = {
                 ...state,
-                count: state.count + action.payload
+                count: state.count + action.payload,
+                details: [...state.details, <Detail>{date: new Date(), buttonClicked: 'ajout'}]
             }
             console.log('newState', newState);
             return newState;
@@ -21,7 +24,8 @@ export function reducer(state = initialState, action) {
         case 'DECREMENT':
             return {
                 ...state,
-                count: state.count - action.payload
+                count: state.count - action.payload,
+                details: [...state.details, <Detail>{date: new Date(), buttonClicked: 'retrait'}]
             }
         break;
 
